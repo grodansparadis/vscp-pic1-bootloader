@@ -27,3 +27,8 @@
 *.i*86
 *.x86_64
 *.hex
+/CANBoot.X/build/default/production/_ext/1472/CANIO.err
+/CANBoot.X/build/default/production/_ext/1472/CANIO.o.d
+/CANBoot.X/dist/default/production/CANBoot.X.production.cof
+/CANBoot.X/dist/default/production/CANBoot.X.production.map
+/CANBoot.X/build/default/production/_ext/1472/CANIO.lst

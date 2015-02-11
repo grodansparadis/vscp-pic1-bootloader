@@ -36,7 +36,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>RealICEPlatformTool</platformTool>
         <languageToolchain>MPASMWIN</languageToolchain>
-        <languageToolchainVersion>5.57</languageToolchainVersion>
+        <languageToolchainVersion>5.59</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>

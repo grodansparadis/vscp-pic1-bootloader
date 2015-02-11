@@ -35,8 +35,8 @@
 ;*
 ;* Basic Operation:
 ;* The following is a CAN bootloader designed for PIC18F microcontrollers 
-;* with built-in CAN such as the PIC18F458. The bootloader is designed to
-;* be simple, small, flexible, and portable.
+;* with built-in CAN such as the PIC18F458/258/2580. The bootloader is
+;* designed to be simple, small, flexible, and portable.
 ;*
 ;* The bootloader can compiled to one of two major modes of operation:
 ;*
@@ -92,6 +92,7 @@
 ;* DATAX - General data.
 ;*
 ;* Control bits:
+;* ------------
 ;* MODE_WRT_UNLCK 	-	Set this to allow write and erase operations to memory.
 ;* MODE_ERASE_ONLY 	- 	Set this to only erase Program Memory on a put command. Must 
 ;*						be on 64 byte boundary.
@@ -100,6 +101,7 @@
 ;* MODE_ACK 		-	Set this to generate an acknowledge after a 'put' (PG Mode only)
 ;*
 ;* Special Commands:
+;* ----------------
 ;* CMD_NOP			0x00	Do nothing
 ;* CMD_RESET		0x01	Issue a soft reset
 ;* CMD_RST_CHKSM	0x02	Reset the checksum counter and verify
@@ -145,14 +147,24 @@
 ;*				|								| (Last byte used as boot flag)
 ;*				|-------------------------------|
 ;*
+;* PIC18F2580 0x7fff (32K) total memory (2K or 4K bootloader)
+;* Bootloader is 512 bytes and fit in 2K bootloader block so offset code with
+;* 0x7ff(2K) or 0xfff(4K)
+;* BBSIZ = 0 -> 2K bootloader block
+;* BBSIZ = 1 -> 4K bootloader block
+;*
+;* Protect bootloader with
+;*      CPB=0   Booltloader code protected
+;*      WRTB=0  Boot Block Write Protected
+;*      EBTRB=0 Boot Block Table Read Proteced
 ;*
 ;* Author               Date        Comment
 ;*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;* Ross Fosler			11/26/02	First full revision	
-;* 
 ;*****************************************************************************/
 ;
-; Changes copyright (c) 2004-2014 Ake Hedman, Grodans Paradis AB
+; Changes copyright (c) 2004-2015 Ake Hedman, Grodans Paradis AB
+; <akhe@grodansparadis.com>
 ;
 ; - Watchdog timer updated during wait for CAN message.
 ; - Symbolic init. of mode control bits.
@@ -163,13 +175,13 @@
 #include	canio.def
 ; *****************************************************************************
 
-CONFIG WDT = ON, WDTPS = 128
-CONFIG OSC = HSPLL
-CONFIG BOREN = BOACTIVE
-CONFIG STVREN = ON
-CONFIG BORV = 3
-CONFIG LVP = ON
-CONFIG CPB = ON
+    CONFIG WDT = ON, WDTPS = 128
+    CONFIG OSC = HSPLL
+    CONFIG BOREN = BOACTIVE
+    CONFIG STVREN = ON
+    CONFIG BORV = 3
+    CONFIG LVP = ON
+    CONFIG CPB = ON
 
 ; *****************************************************************************
 #ifndef		EEADRH
@@ -247,7 +259,11 @@ _REMAP_INTV_L	CODE	LOW_INT_VECT
 ; *****************************************************************************
 IntVectLowRemapped
 
-
+; Enable bootflag i EEPROM
+; Set nickname to 0xfe
+; This will only happen when device gets programed with bootloader
+    org 0xf00000
+    de 0xff,0xfe
 
 ; *****************************************************************************
 _STARTUP	CODE	0x00
