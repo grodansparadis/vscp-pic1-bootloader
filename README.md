@@ -1,4 +1,4 @@
-# vscp_pic1_bootloader
+<h1>VSCP PIC1 Bootloader</h1>
 VSCP Microchip PIC18F bootloader for use with VSCP over CAN 
 
 This bootloader will work with the VSCP PIC1 algorithm of VSCP Works and is a For info see
@@ -14,6 +14,11 @@ If byte 0 in EEPROM is not oxFF on startup a normal boot of the relocated code w
 Hex files for device programming is available here
 Hex files available here https://sourceforge.net/projects/m2m/files/VSCP%20Firmware/bootloader/
 
+On reset id=0x000015fe should be seen from a device with a pic1 bootlader installed. 0xfe is fetched from EEPROM
+address = 1 and for the bootloader to start the content at EEPROM address= 0 should hold 0xff. In all other 
+cases the application code will be started. 
+
+The application program should start at offset 0x200
 
 Ake Hedman
 akhe@paradiseofthefrog.com

@@ -83,7 +83,7 @@ MP_LINKER_DEBUG_OPTION=-r=ROM@0x7DC0:0x7FFF -r=RAM@GPR:0x5F4:0x5FF
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${OBJECTDIR}/_ext/1472/CANIO.o: ../CANIO.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1472 
+	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/CANIO.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/CANIO.o 
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/_ext/1472/CANIO.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_REAL_ICE=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/_ext/1472/CANIO.lst\" -e\"${OBJECTDIR}/_ext/1472/CANIO.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/_ext/1472/CANIO.o\" \"../CANIO.asm\" 
@@ -92,7 +92,7 @@ ${OBJECTDIR}/_ext/1472/CANIO.o: ../CANIO.asm  nbproject/Makefile-${CND_CONF}.mk
 	
 else
 ${OBJECTDIR}/_ext/1472/CANIO.o: ../CANIO.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1472 
+	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/CANIO.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/CANIO.o 
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/_ext/1472/CANIO.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/_ext/1472/CANIO.lst\" -e\"${OBJECTDIR}/_ext/1472/CANIO.err\" $(ASM_OPTIONS)   -o\"${OBJECTDIR}/_ext/1472/CANIO.o\" \"../CANIO.asm\" 

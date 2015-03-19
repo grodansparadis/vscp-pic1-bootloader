@@ -191,8 +191,8 @@
 #define		TRUE	1
 #define		FALSE  	0
 
-#define 	VSCP_BOOT_FLAG		0xff	; Boot flag is stored in EEPROM and if
-										; there the bootloader will be activated.
+#define 	VSCP_BOOT_FLAG		0xff	; Boot flag is stored in EEPROM location 0
+                                        ; and if there the bootloader will be activated.
 
 #define 	WREG1 	PRODH				; Alternate working register
 #define		WREG2	PRODL
