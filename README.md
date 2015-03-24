@@ -18,7 +18,7 @@ On reset id=0x000015fe should be seen from a device with a pic1 bootlader instal
 address = 1 and for the bootloader to start the content at EEPROM address= 0 should hold 0xff. In all other 
 cases the application code will be started. 
 
-The application program should start at offset 0x200
+The application program should start at offset 0x800
 
 Ake Hedman
 akhe@paradiseofthefrog.com
