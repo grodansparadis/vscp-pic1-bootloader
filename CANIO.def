@@ -3,9 +3,9 @@
 ;#define		MODE_SELF_VERIFY
 
 #define		NEAR_JUMP
-#define		HIGH_INT_VECT	0x208
-#define		LOW_INT_VECT	0x218
-#define		RESET_VECT		0x200
+#define		HIGH_INT_VECT	0x808
+#define		LOW_INT_VECT	0x818
+#define		RESET_VECT		0x800
 
 #define		CAN_CD_BIT		RXB0EIDH,0		; AKHE changed *all* to EIDH from EIDL
 #define		CAN_PG_BIT		RXB0EIDH,1

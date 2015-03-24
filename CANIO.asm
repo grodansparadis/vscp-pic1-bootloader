@@ -175,14 +175,18 @@
 #include	canio.def
 ; *****************************************************************************
 
-    CONFIG WDT = ON, WDTPS = 128
+; WDT must be off
+    CONFIG WDT = OFF, WDTPS = 128   
     CONFIG OSC = HSPLL
     CONFIG BOREN = BOACTIVE
     CONFIG STVREN = ON
     CONFIG BORV = 3
-    CONFIG LVP = ON
+; LVP must be off
+    CONFIG LVP = OFF
     CONFIG CPB = ON
+    CONFIG BBSIZ = 2048  
 
+ 
 ; *****************************************************************************
 #ifndef		EEADRH
 #define 	EEADRH	EEADR+1

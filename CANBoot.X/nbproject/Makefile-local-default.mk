@@ -15,23 +15,23 @@
 # $ makeMP_CC="/opt/microchip/mplabc30/v3.30c/bin/pic30-gcc" ...  
 #
 SHELL=cmd.exe
-PATH_TO_IDE_BIN=C:/Program Files (x86)/Microchip/MPLABX/mplab_ide/mplab_ide/modules/../../bin/
+PATH_TO_IDE_BIN=C:/Program Files (x86)/Microchip/MPLABX/v3.00.02-beta/mplab_ide/mplab_ide/modules/../../bin/
 # Adding MPLAB X bin directory to path.
-PATH:=C:/Program Files (x86)/Microchip/MPLABX/mplab_ide/mplab_ide/modules/../../bin/:$(PATH)
+PATH:=C:/Program Files (x86)/Microchip/MPLABX/v3.00.02-beta/mplab_ide/mplab_ide/modules/../../bin/:$(PATH)
 # Path to java used to run MPLAB X when this makefile was created
-MP_JAVA_PATH="C:\Program Files (x86)\Microchip\MPLABX\sys\java\jre1.7.0_67/bin/"
+MP_JAVA_PATH="C:\Program Files (x86)\Microchip\MPLABX\v3.00.02-beta\sys\java\jre1.7.0_67/bin/"
 OS_CURRENT="$(shell uname -s)"
 # MP_CC is not defined
 # MP_CPPC is not defined
 # MP_BC is not defined
-MP_AS="C:\Program Files (x86)\Microchip\MPLABX\mpasmx\mpasmx.exe"
-MP_LD="C:\Program Files (x86)\Microchip\MPLABX\mpasmx\mplink.exe"
-MP_AR="C:\Program Files (x86)\Microchip\MPLABX\mpasmx\mplib.exe"
-DEP_GEN=${MP_JAVA_PATH}java -jar "C:/Program Files (x86)/Microchip/MPLABX/mplab_ide/mplab_ide/modules/../../bin/extractobjectdependencies.jar"
+MP_AS="C:\Program Files (x86)\Microchip\MPLABX\v3.00.02-beta\mpasmx\mpasmx.exe"
+MP_LD="C:\Program Files (x86)\Microchip\MPLABX\v3.00.02-beta\mpasmx\mplink.exe"
+MP_AR="C:\Program Files (x86)\Microchip\MPLABX\v3.00.02-beta\mpasmx\mplib.exe"
+DEP_GEN=${MP_JAVA_PATH}java -jar "C:/Program Files (x86)/Microchip/MPLABX/v3.00.02-beta/mplab_ide/mplab_ide/modules/../../bin/extractobjectdependencies.jar"
 # MP_CC_DIR is not defined
 # MP_CPPC_DIR is not defined
 # MP_BC_DIR is not defined
-MP_AS_DIR="C:\Program Files (x86)\Microchip\MPLABX\mpasmx"
-MP_LD_DIR="C:\Program Files (x86)\Microchip\MPLABX\mpasmx"
-MP_AR_DIR="C:\Program Files (x86)\Microchip\MPLABX\mpasmx"
+MP_AS_DIR="C:\Program Files (x86)\Microchip\MPLABX\v3.00.02-beta\mpasmx"
+MP_LD_DIR="C:\Program Files (x86)\Microchip\MPLABX\v3.00.02-beta\mpasmx"
+MP_AR_DIR="C:\Program Files (x86)\Microchip\MPLABX\v3.00.02-beta\mpasmx"
 # MP_BC_DIR is not defined
