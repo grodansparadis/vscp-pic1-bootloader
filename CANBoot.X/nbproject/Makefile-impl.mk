@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=CANBoot.X
 
 # Active Configuration
-DEFAULTCONF=default
+DEFAULTCONF=pic18f26k80
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=default 
+ALLCONFS=pic18f2580 pic18f26k80 
 
 
 # build
@@ -45,13 +45,15 @@ ALLCONFS=default
 
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f2580 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f26k80 clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f2580 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f26k80 build
 
 
 
