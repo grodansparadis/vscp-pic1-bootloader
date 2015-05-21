@@ -191,66 +191,67 @@
 #ifdef __18F26K80
 ; ASM source line config statements
 
-; CONFIG1L
-  CONFIG  RETEN = OFF           ; VREG Sleep Enable bit (Ultra low-power regulator is Disabled (Controlled by REGSLP bit))
-  CONFIG  INTOSCSEL = HIGH      ; LF-INTOSC Low-power Enable bit (LF-INTOSC in High-power mode during Sleep)
-  CONFIG  SOSCSEL = DIG         ; SOSC Power Selection and mode Configuration bits (High Power SOSC circuit selected)
-  CONFIG  XINST = OFF           ; Extended Instruction Set (Disabled)
+    ; CONFIG1L
+    CONFIG  RETEN = OFF           ; VREG Sleep Enable bit (Ultra low-power regulator is Disabled (Controlled by REGSLP bit))
+    CONFIG  INTOSCSEL = HIGH      ; LF-INTOSC Low-power Enable bit (LF-INTOSC in High-power mode during Sleep)
+    CONFIG  SOSCSEL = DIG         ; SOSC Power Selection and mode Configuration bits (High Power SOSC circuit selected)
+    CONFIG  XINST = OFF           ; Extended Instruction Set (Disabled)
 
-; CONFIG1H
-  CONFIG  FOSC = INTIO2         ; Oscillator (Internal RC oscillator)
-  CONFIG  PLLCFG = ON           ; PLL x4 Enable bit (Enabled)
-  CONFIG  FCMEN = OFF           ; Fail-Safe Clock Monitor (Disabled)
-  CONFIG  IESO = OFF            ; Internal External Oscillator Switch Over Mode (Disabled)
+    ; CONFIG1H
+    CONFIG  FOSC = HS2            ; Oscillator Crystal 10 MHz
+    CONFIG  PLLCFG = ON           ; PLL x4 Enable bit (Enabled)
+    CONFIG  FCMEN = OFF           ; Fail-Safe Clock Monitor (Disabled)
+    CONFIG  IESO = OFF            ; Internal External Oscillator Switch Over Mode (Disabled)
 
-; CONFIG2L
-  CONFIG  PWRTEN = ON           ; Power Up Timer (Enabled)
-  CONFIG  BOREN = SBORDIS       ; Brown Out Detect (Enabled in hardware, SBOREN disabled)
-  CONFIG  BORV = 1              ; Brown-out Reset Voltage bits (2.7V)
-  CONFIG  BORPWR = ZPBORMV      ; BORMV Power level (ZPBORMV instead of BORMV is selected)
+    ; CONFIG2L
+    CONFIG  PWRTEN = ON           ; Power Up Timer (Enabled)
+    CONFIG  BOREN = SBORDIS       ; Brown Out Detect (Enabled in hardware, SBOREN disabled)
+    CONFIG  BORV = 1              ; Brown-out Reset Voltage bits (2.7V)
+    CONFIG  BORPWR = ZPBORMV      ; BORMV Power level (ZPBORMV instead of BORMV is selected)
 
-; CONFIG2H
-  CONFIG  WDTEN = SWDTDIS       ; Watchdog Timer (WDT enabled in hardware; SWDTEN bit disabled)
-  CONFIG  WDTPS = 1048576       ; Watchdog Postscaler (1:1048576)
+    ; CONFIG2H
+    CONFIG  WDTEN = SWDTDIS       ; Watchdog Timer (WDT enabled in hardware; SWDTEN bit disabled)
+    CONFIG  WDTPS = 1048576       ; Watchdog Postscaler (1:1048576)
 
-; CONFIG3H
-  CONFIG  CANMX = PORTB         ; ECAN Mux bit (ECAN TX and RX pins are located on RB2 and RB3, respectively)
-  CONFIG  MSSPMSK = MSK7        ; MSSP address masking (7 Bit address masking mode)
-  CONFIG  MCLRE = ON            ; Master Clear Enable (MCLR Enabled, RE3 Disabled)
+    ; CONFIG3H
+    CONFIG  CANMX = PORTB         ; ECAN Mux bit (ECAN TX and RX pins are located on RB2 and RB3, respectively)
+    CONFIG  MSSPMSK = MSK7        ; MSSP address masking (7 Bit address masking mode)
+    CONFIG  MCLRE = ON            ; Master Clear Enable (MCLR Enabled, RE3 Disabled)
 
-; CONFIG4L
-  CONFIG  STVREN = ON           ; Stack Overflow Reset (Enabled)
-  CONFIG  BBSIZ = BB2K          ; Boot Block Size (1K word Boot Block size)
+    ; CONFIG4L
+    CONFIG  STVREN = ON           ; Stack Overflow Reset (Enabled)
+    CONFIG  BBSIZ = BB2K          ; Boot Block Size (1K word Boot Block size)
 
-; CONFIG5L
-  CONFIG  CP0 = OFF             ; Code Protect 00800-03FFF (Disabled)
-  CONFIG  CP1 = OFF             ; Code Protect 04000-07FFF (Disabled)
-  CONFIG  CP2 = OFF             ; Code Protect 08000-0BFFF (Disabled)
-  CONFIG  CP3 = OFF             ; Code Protect 0C000-0FFFF (Disabled)
+    ; CONFIG5L
+    CONFIG  CP0 = OFF             ; Code Protect 00800-03FFF (Disabled)
+    CONFIG  CP1 = OFF             ; Code Protect 04000-07FFF (Disabled)
+    CONFIG  CP2 = OFF             ; Code Protect 08000-0BFFF (Disabled)
+    CONFIG  CP3 = OFF             ; Code Protect 0C000-0FFFF (Disabled)
 
-; CONFIG5H
-  CONFIG  CPB = ON              ; Code Protect Boot (Disabled)
-  CONFIG  CPD = OFF             ; Data EE Read Protect (Disabled)
+    ; CONFIG5H
+    CONFIG  CPB = ON              ; Code Protect Boot (Disabled)
+    CONFIG  CPD = OFF             ; Data EE Read Protect (Disabled)
 
-; CONFIG6L
-  CONFIG  WRT0 = OFF            ; Table Write Protect 00800-03FFF (Disabled)
-  CONFIG  WRT1 = OFF            ; Table Write Protect 04000-07FFF (Disabled)
-  CONFIG  WRT2 = OFF            ; Table Write Protect 08000-0BFFF (Disabled)
-  CONFIG  WRT3 = OFF            ; Table Write Protect 0C000-0FFFF (Disabled)
+    ; CONFIG6L
+    CONFIG  WRT0 = OFF            ; Table Write Protect 00800-03FFF (Disabled)
+    CONFIG  WRT1 = OFF            ; Table Write Protect 04000-07FFF (Disabled)
+    CONFIG  WRT2 = OFF            ; Table Write Protect 08000-0BFFF (Disabled)
+    CONFIG  WRT3 = OFF            ; Table Write Protect 0C000-0FFFF (Disabled)
 
-; CONFIG6H
-  CONFIG  WRTC = OFF            ; Config. Write Protect (Disabled)
-  CONFIG  WRTB = OFF            ; Table Write Protect Boot (Disabled)
-  CONFIG  WRTD = OFF            ; Data EE Write Protect (Disabled)
+    ; CONFIG6H
+    CONFIG  WRTC = OFF            ; Config. Write Protect (Disabled)
+    CONFIG  WRTB = ON             ; Table Write Protect Boot (Disabled)
+    CONFIG  WRTD = OFF            ; Data EE Write Protect (Disabled)
 
-; CONFIG7L
-  CONFIG  EBTR0 = OFF           ; Table Read Protect 00800-03FFF (Disabled)
-  CONFIG  EBTR1 = OFF           ; Table Read Protect 04000-07FFF (Disabled)
-  CONFIG  EBTR2 = OFF           ; Table Read Protect 08000-0BFFF (Disabled)
-  CONFIG  EBTR3 = OFF           ; Table Read Protect 0C000-0FFFF (Disabled)
+    ; CONFIG7L
+    CONFIG  EBTR0 = OFF           ; Table Read Protect 00800-03FFF (Disabled)
+    CONFIG  EBTR1 = OFF           ; Table Read Protect 04000-07FFF (Disabled)
+    CONFIG  EBTR2 = OFF           ; Table Read Protect 08000-0BFFF (Disabled)
+    CONFIG  EBTR3 = OFF           ; Table Read Protect 0C000-0FFFF (Disabled)
 
-; CONFIG7H
-  CONFIG  EBTRB = OFF           ; Table Read Protect Boot (Disabled)
+    ; CONFIG7H
+    CONFIG  EBTRB = ON            ; Table Read Protect Boot (Disabled)
+
 #endif
  
 ; *****************************************************************************
@@ -338,23 +339,23 @@ IntVectLowRemapped
 ; *****************************************************************************
 _STARTUP	CODE	0x00
 ; *****************************************************************************
-	bra		_CANInit
-	bra		_StartWrite
+    bra		_CANInit
+    bra		_StartWrite
 ; *****************************************************************************
 _INTV_H		CODE	0x08
 ; *****************************************************************************
 #ifdef	NEAR_JUMP
-	bra		IntVectHighRemapped
+    bra		IntVectHighRemapped
 #else
-	goto	IntVectHighRemapped
+    goto	IntVectHighRemapped
 #endif
 ; *****************************************************************************
 _INTV_L		CODE	0x18
 ; *****************************************************************************	
 #ifdef	NEAR_JUMP
-	bra		IntVectLowRemapped
+    bra		IntVectLowRemapped
 #else
-	goto	IntVectLowRemapped
+    goto	IntVectLowRemapped
 #endif
 ; *****************************************************************************	
 
@@ -383,21 +384,22 @@ _CAN_IO_MODULE 	CODE
 ; *****************************************************************************
 _StartWrite:
 
-	movwf	EECON1
+    banksel EECON1
+    movwf	EECON1
 	
-	btfss	MODE_WRT_UNLCK			; Stop if write locked
-	return
+    btfss	MODE_WRT_UNLCK			; Stop if write locked
+    return
 		
-	movlw	0x55					; Unlock
-	movwf	EECON2
-	movlw	0xAA
-	movwf	EECON2
-	bsf		EECON1, WR				; Start the write
-	nop
+    movlw	0x55					; Unlock
+    movwf	EECON2
+    movlw	0xAA
+    movwf	EECON2
+    bsf		EECON1, WR				; Start the write
+    nop
 	
-	btfsc	EECON1, WR				; Wait (depends on mem type)
-	bra		$ - 2
-	return
+    btfsc	EECON1, WR				; Wait (depends on mem type)
+    bra		$ - 2
+    return
 ; *****************************************************************************
 
 
@@ -426,10 +428,11 @@ _StartWrite:
 ;***************************************************************************
 _UpdateChksum:
 
-	addwf	_bootChksmL, F		 	; Keep a checksum
-	btfsc	STATUS, C
-	incf	_bootChksmH, F
-	return
+    banksel STATUS
+    addwf	_bootChksmL, F		 	; Keep a checksum
+    btfsc	STATUS, C
+    incf	_bootChksmH, F
+    return
 ; *****************************************************************************
 
 
@@ -462,7 +465,11 @@ _CANInit:
 
 ; AKHE If RC0 is zero on boot 
 ; force bootloader mode
-
+    banksel ANCON0
+    clrf    ANCON0
+    clrf    ANCON1
+    movlw   b'00001100'
+    movwf   TRISB
     movlw   b'11111101'             ; RC0 is input
     movwf   TRISC
     bsf     PORTC,RC1
@@ -470,75 +477,82 @@ _CANInit:
     andlw   b'00000001'
     bz      bootload_mode	
 
-	clrf	EECON1
-	clrf	EEADR					; Point to first location of EEDATA (BOOTFLAG)
-	clrf	EEADRH	
+    banksel EECON1
+    clrf	EECON1
+    clrf	EEADR					; Point to first location of EEDATA (BOOTFLAG)
+    clrf	EEADRH	
     bsf		EECON1, RD				; Read the control code
-	incfsz	EEDATA, W
+    incfsz	EEDATA, W
 
 #ifdef	NEAR_JUMP
-	bra		ResetRemapped			; If not 0xFF then normal reset
+    bra		ResetRemapped			; If not 0xFF then normal reset
 #else
-	goto	ResetRemapped
+    goto	ResetRemapped
 #endif
 
 bootload_mode:
-	
-	clrf	_bootSpcCmd				; Reset the special command register
+    
+    banksel EECON1
+    clrf	_bootSpcCmd				; Reset the special command register
 
 	; Get Nickname from EEPROM and save in RAM
-	movlw	0x01
-	movwf	EEADR					; Point at nickname in EEPROM	
+    movlw	0x01
+    movwf	EEADR					; Point at nickname in EEPROM	
     bsf		EECON1, RD				; Read the control code
-	movf	EEDATA, W
-	movwf 	_vscpNickname
+    movf	EEDATA, W
+    movwf 	_vscpNickname
 	
-	movlw	( MODE_FLAG_AUTO_ERASE | MODE_FLAG_AUTO_INC | MODE_FLAG_ACK )
-	movwf	_bootCtlBits
+    movlw	( MODE_FLAG_AUTO_ERASE | MODE_FLAG_AUTO_INC | MODE_FLAG_ACK )
+    movwf	_bootCtlBits
 		
-	movlb	d'15'					; Set Bank 15
-	
+    movlb	d'15'					; Set Bank 15
+    
 #ifdef __18F2580
-	bcf		TRISB, CANTX			; Set the TX pin to output	
+    bcf		TRISB, CANTX			; Set the TX pin to output	
 #endif
 
 #ifdef __18F26K80
-	bcf		TRISB, RB2              ; Set the TX pin to output
+    ;movlw   b'00001000'             ; CAN RX is input
+    ;movwf   TRISB
 #endif
+    
+    banksel RXF0SIDH
+    movlw	CAN_RXF0SIDH			; Set filter 0
+    movwf	RXF0SIDH
+    movlw	CAN_RXF0SIDL
+    movwf	RXF0SIDL
+    banksel WREG
+    comf	WREG					; Prevent filter 1 from causing a
+    banksel RXF1SIDL
+    movwf	RXF1SIDL				; receive event
+    movlw	CAN_RXF0EIDH
+    movwf	RXF0EIDH
+    movlw	CAN_RXF0EIDL
+    movwf	RXF0EIDL
+	
+    movlw	CAN_RXM0SIDH			; Set mask
+    movwf	RXM0SIDH
+    movlw	CAN_RXM0SIDL
+    movwf	RXM0SIDL
+    movlw	CAN_RXM0EIDH
+    movwf	RXM0EIDH
+    movlw	CAN_RXM0EIDL
+    movwf	RXM0EIDL
+	
+    movlw	CAN_BRGCON1				; Set bit rate
+    movwf	BRGCON1
+    movlw	CAN_BRGCON2
+    movwf	BRGCON2
+    movlw	CAN_BRGCON3
+    movwf	BRGCON3
+	
+	banksel CIOCON
+    movlw	CAN_CIOCON				; Set IO
+    movwf	CIOCON
 		
-	movlw	CAN_RXF0SIDH			; Set filter 0
-	movwf	RXF0SIDH
-	movlw	CAN_RXF0SIDL
-	movwf	RXF0SIDL
-	comf	WREG					; Prevent filter 1 from causing a
-	movwf	RXF1SIDL				; receive event
-	movlw	CAN_RXF0EIDH
-	movwf	RXF0EIDH
-	movlw	CAN_RXF0EIDL
-	movwf	RXF0EIDL
-	
-	movlw	CAN_RXM0SIDH			; Set mask
-	movwf	RXM0SIDH
-	movlw	CAN_RXM0SIDL
-	movwf	RXM0SIDL
-	movlw	CAN_RXM0EIDH
-	movwf	RXM0EIDH
-	movlw	CAN_RXM0EIDL
-	movwf	RXM0EIDL
-	
-	movlw	CAN_BRGCON1				; Set bit rate
-	movwf	BRGCON1
-	movlw	CAN_BRGCON2
-	movwf	BRGCON2
-	movlw	CAN_BRGCON3
-	movwf	BRGCON3
-	
-	movlw	CAN_CIOCON				; Set IO
-	movwf	CIOCON
-		
-	clrf	CANCON					; Enter Normal mode
+    clrf	CANCON					; Enter Normal mode
 
-	bra 	_CANSendAck2			; AKHE Initial message from boot loader
+    goto 	_CANSendAck2			; AKHE Initial message from boot loader
 	
 ; *****************************************************************************
 	
@@ -555,40 +569,43 @@ bootload_mode:
 
 _CANMain:
 
+    banksel PORTC
     bsf     PORTC,RC0           ; AKHE: status on
 
-	bcf		RXB0CON, RXFUL		; Clear the receive flag
+    banksel RXB0CON
+    bcf		RXB0CON, RXFUL		; Clear the receive flag
 
     ; Wait for CAN messsage
-	clrwdt						; AKHE: Clear watchdog on every turn
-	btfss	RXB0CON, RXFUL		; Wait for a message
-	bra		$ - 4				; AKHE: 
+    clrwdt						; AKHE: Clear watchdog on every turn
+    btfss	RXB0CON, RXFUL		; Wait for a message
+    bra		$ - 4				; AKHE: 
 	
     bcf     PORTC,RC0           ; AKHE: status off
 	
 #ifdef 	ALLOW_GET_CMD
-	btfss	CAN_PG_BIT			; Put or get data?
-	bra		_CANMainJp1
+    btfss	CAN_PG_BIT			; Put or get data?
+    bra		_CANMainJp1
 	
 ; Put
 	
-	lfsr	0, TXB0D0			; Set pointer to the transmit buffer
-	movlw	0x08
-	movwf	_bootCount			; Setup the count to eight
-	movwf	WREG1
-	bra		_CANMainJp2
+    lfsr	0, TXB0D0			; Set pointer to the transmit buffer
+    movlw	0x08
+    movwf	_bootCount			; Setup the count to eight
+    movwf	WREG1
+    bra		_CANMainJp2
 #endif
 
 ; Get
 
 _CANMainJp1:
 
-	lfsr	0, RXB0D0			; Set pointer to the receive buffer
-	movf	RXB0DLC, W
-	andlw	0x0F
-	movwf	_bootCount			; Store the count
-	movwf	WREG1
-	bz		_CANMain			; Go back if no data specified for a put
+    banksel RXB0DLC
+    lfsr	0, RXB0D0			; Set pointer to the receive buffer
+    movf	RXB0DLC, W
+    andlw	0x0F
+    movwf	_bootCount			; Store the count
+    movwf	WREG1
+    bz		_CANMain			; Go back if no data specified for a put
 	
 _CANMainJp2:
 
@@ -637,8 +654,8 @@ _CANMainJp2:
 
 _ReadWriteMemory:						
 
-	btfsc	CAN_CD_BIT				; Write/read data or control registers
-	bra		_DataReg							
+    btfsc	CAN_CD_BIT				; Write/read data or control registers
+    bra		_DataReg							
 
 
 ; *****************************************************************************
@@ -646,39 +663,43 @@ _ReadWriteMemory:
 ; Then is executes any immediate command received.
 
 _ControlReg:
-
-	lfsr	1, _bootCtlMem
+    
+    lfsr	1, _bootCtlMem
 	
 _ControlRegLp1:
+    
+    banksel POSTINC1
 
 #ifdef 	ALLOW_GET_CMD
-	btfsc	CAN_PG_BIT				; or copy control registers to buffer
-	movff	POSTINC1, POSTINC0
-	btfss	CAN_PG_BIT				; Copy the buffer to the control registers
+    btfsc	CAN_PG_BIT				; or copy control registers to buffer
+    movff	POSTINC1, POSTINC0
+    btfss	CAN_PG_BIT				; Copy the buffer to the control registers
 #endif
-	movff	POSTINC0, POSTINC1
+    movff	POSTINC0, POSTINC1
 
-	decfsz	WREG1, F
-	bra		_ControlRegLp1	
+    decfsz	WREG1, F
+    bra		_ControlRegLp1	
 	
 #ifdef 	ALLOW_GET_CMD
-	btfsc	CAN_PG_BIT	
-	bra		_CANSendResponce		; Send response if get
+    btfsc	CAN_PG_BIT	
+    bra		_CANSendResponce		; Send response if get
 #endif
 ; *********************************************************
 
 ; *********************************************************	
 ; This is a no operation command. 
-	movf	_bootSpcCmd, W			; NOP Command
-	bz		_CANSendAck2			; or send an acknowledge 
+    movf	_bootSpcCmd, W			; NOP Command
+    btfsc   STATUS,Z
+	goto	_CANSendAck2			; or send an acknowledge
 ; *********************************************************	
 
 ; *********************************************************	
 ; This is the reset command. 
 
-	xorlw	CMD_RESET				; RESET Command
-	btfsc	STATUS, Z
-	reset
+    banksel STATUS
+    xorlw	CMD_RESET				; RESET Command
+    btfsc	STATUS, Z
+    reset
 ; *********************************************************	
 	
 ; *********************************************************	
@@ -686,13 +707,13 @@ _ControlRegLp1:
 ; resets the internal check registers, i.e. checksum and
 ; self verify.
 
-	movf	_bootSpcCmd, W			; RESET_CHKSM Command
-	xorlw	CMD_RST_CHKSM
-	bnz		_SpecialCmdJp1
+    movf	_bootSpcCmd, W			; RESET_CHKSM Command
+    xorlw	CMD_RST_CHKSM
+    bnz		_SpecialCmdJp1
 	
-	clrf	_bootChksmH				; Reset chksum
-	clrf	_bootChksmL
-	bcf		ERR_VERIFY				; Clear the error verify flag
+    clrf	_bootChksmH				; Reset chksum
+    clrf	_bootChksmL
+    bcf		ERR_VERIFY				; Clear the error verify flag
 	
 ; *********************************************************	
 
@@ -703,32 +724,33 @@ _ControlRegLp1:
 
 _SpecialCmdJp1:
 
-	movf	_bootSpcCmd, W			; RUN_CHKSM Command
-	xorlw	CMD_CHK_RUN
-	bnz		_SpecialCmdJp2
+    movf	_bootSpcCmd, W			; RUN_CHKSM Command
+    xorlw	CMD_CHK_RUN
+    bnz		_SpecialCmdJp2
 
-	movf	_bootChkL, W			; Add the control byte
-	addwf	_bootChksmL, F
-	bnz		_SpecialCmdJp2
-	movf	_bootChkH, W
-	addwfc	_bootChksmH, F
-	bnz		_SpecialCmdJp2
+    movf	_bootChkL, W			; Add the control byte
+    addwf	_bootChksmL, F
+    bnz		_SpecialCmdJp2
+    movf	_bootChkH, W
+    addwfc	_bootChksmH, F
+    bnz		_SpecialCmdJp2
 	
-	btfsc	ERR_VERIFY				; Look for verify errors
-	bra		_SpecialCmdJp2
+    btfsc	ERR_VERIFY				; Look for verify errors
+    bra		_SpecialCmdJp2
 	
-	clrf	EEADR					; AKHE - Point to first location of EEDATA 
-	clrf	EEADRH	
-	clrf	EEDATA					; and clear the data
-	movlw	b'00000100'				; Setup for EEData
-	rcall	_StartWrite
+    banksel EEADR
+    clrf	EEADR					; AKHE - Point to first location of EEDATA 
+    clrf	EEADRH	
+    clrf	EEDATA					; and clear the data
+    movlw	b'00000100'				; Setup for EEData
+    rcall	_StartWrite
 	
 _SpecialCmdJp2:
 
 #ifdef 	ALLOW_GET_CMD
-	bra		_CANSendAck				; or send an acknowledge
+    bra		_CANSendAck				; or send an acknowledge
 #else
-	bra		_CANMain
+    bra		_CANMain
 #endif					
 ; *****************************************************************************
 	
@@ -748,27 +770,28 @@ _DataReg:
 							
 _SetPointers:
 
-	movf	_bootAddrU, W			; Copy upper pointer
-	movwf	TBLPTRU
-	andlw	0xF0					; Filter
-	movwf	WREG2
+    banksel TBLPTRU
+    movf	_bootAddrU, W			; Copy upper pointer
+    movwf	TBLPTRU
+    andlw	0xF0					; Filter
+    movwf	WREG2
 	
-	movf	_bootAddrH, W			; Copy the high pointer
-	movwf	TBLPTRH
-	movwf	EEADRH	
+    movf	_bootAddrH, W			; Copy the high pointer
+    movwf	TBLPTRH
+    movwf	EEADRH	
 	
-	movf	_bootAddrL, W			; Copy the low pointer
-	movwf	TBLPTRL
-	movwf	EEADR
+    movf	_bootAddrL, W			; Copy the low pointer
+    movwf	TBLPTRL
+    movwf	EEADR
 	
-	btfss	MODE_AUTO_INC			; Adjust the pointer if auto inc is enabled
-	bra		_SetPointersJp1
+    btfss	MODE_AUTO_INC			; Adjust the pointer if auto inc is enabled
+    bra		_SetPointersJp1
 	
-	movf	_bootCount, W			; add the count to the pointer
-	addwf	_bootAddrL, F
-	clrf	WREG
-	addwfc	_bootAddrH, F
-	addwfc	_bootAddrU, F
+    movf	_bootCount, W			; add the count to the pointer
+    addwf	_bootAddrL, F
+    clrf	WREG
+    addwfc	_bootAddrH, F
+    addwfc	_bootAddrU, F
 	
 _SetPointersJp1:
 
@@ -779,38 +802,38 @@ _SetPointersJp1:
 
 _Decode:
 
-	movlw	0x30					; Program memory < 0x300000
-	cpfslt	WREG2
-	bra		_DecodeJp1
+    movlw	0x30					; Program memory < 0x300000
+    cpfslt	WREG2
+    bra		_DecodeJp1
 #ifdef 	ALLOW_GET_CMD
-	btfsc	CAN_PG_BIT
-	bra		_PMRead
+    btfsc	CAN_PG_BIT
+    bra		_PMRead
 #endif
-	bra		_PMEraseWrite
+    bra		_PMEraseWrite
 	
 		
 _DecodeJp1:
 	
-	movf	WREG2,W					; Config memory = 0x300000
-	xorlw	0x30
-	bnz		_DecodeJp2
+    movf	WREG2,W					; Config memory = 0x300000
+    xorlw	0x30
+    bnz		_DecodeJp2
 #ifdef 	ALLOW_GET_CMD
-	btfsc	CAN_PG_BIT
-	bra		_PMRead
+    btfsc	CAN_PG_BIT
+    bra		_PMRead
 #endif
-	bra		_CFGWrite
+    bra		_CFGWrite
 	
 	
 _DecodeJp2:
 	
-	movf	WREG2,W					; EEPROM data = 0xF00000
-	xorlw	0xF0
-	bnz		_CANMain
+    movf	WREG2,W					; EEPROM data = 0xF00000
+    xorlw	0xF0
+    bnz		_CANMain
 #ifdef 	ALLOW_GET_CMD
-	btfsc	CAN_PG_BIT
-	bra		_EERead
+    btfsc	CAN_PG_BIT
+    bra		_EERead
 #endif
-	bra		_EEWrite
+    bra		_EEWrite
 ; *****************************************************************************
 	
 	
@@ -848,101 +871,107 @@ _DecodeJp2:
 ; *****************************************************************************
 #ifdef 	ALLOW_GET_CMD
 _PMRead:
-	tblrd	*+						; Fill the buffer
-	movff	TABLAT, POSTINC0
-	decfsz	WREG1, F		
-	bra		_PMRead					; Not finished then repeat
+    banksel TABLAT
+    tblrd	*+						; Fill the buffer
+    movff	TABLAT, POSTINC0
+    decfsz	WREG1, F		
+    bra		_PMRead					; Not finished then repeat
 	
-	bra		_CANSendResponce
+    bra		_CANSendResponce
 #endif
 ; *********************************************************
 
 ; *********************************************************
 _PMEraseWrite:
 
-	btfss	MODE_AUTO_ERASE			; Erase if auto erase is requested
-	bra		_PMWrite
+    btfss	MODE_AUTO_ERASE			; Erase if auto erase is requested
+    bra		_PMWrite
 
 _PMErase:
 
-	movf	TBLPTRL, W				; Check for a valid 64 byte border
-	andlw	b'00111111'
-	bnz		_PMWrite
+    banksel TBLPTRL
+    movf	TBLPTRL, W				; Check for a valid 64 byte border
+    andlw	b'00111111'
+    bnz		_PMWrite
 
 _PMEraseJp1:
 
-	movlw	b'10010100'				; Setup erase
-	rcall	_StartWrite				; Erase the row
+    movlw	b'10010100'				; Setup erase
+    rcall	_StartWrite				; Erase the row
 
 _PMWrite:
 
-	btfsc	MODE_ERASE_ONLY			; Don't write if erase only is requested
+    btfsc	MODE_ERASE_ONLY			; Don't write if erase only is requested
 #ifdef 	ALLOW_GET_CMD
-	bra		_CANSendAck
+    bra		_CANSendAck
 #else
-	bra		_CANMain
+    bra		_CANMain
 #endif
 
-	movf	TBLPTRL, W				; Check for a valid 8 byte border
-	andlw	b'00000111'
-	bnz		_CANMain	
+    banksel TBLPTRL
+    movf	TBLPTRL, W				; Check for a valid 8 byte border
+    andlw	b'00000111'
+    bnz		_CANMain	
  	
-	movlw	0x08
-	movwf	WREG1
+    movlw	0x08
+    movwf	WREG1
 
 _PMWriteLp1:
 
-	movf	POSTINC0, W 			; Load the holding registers
-	movwf	TABLAT
+    banksel POSTINC0
+    movf	POSTINC0, W 			; Load the holding registers
+    movwf	TABLAT
 	
-	rcall	_UpdateChksum			; Adjust the checksum
+    rcall	_UpdateChksum			; Adjust the checksum
 
-	tblwt	*+					
+    tblwt	*+					
 	
-	decfsz	WREG1, F
-	bra		_PMWriteLp1
+    decfsz	WREG1, F
+    bra		_PMWriteLp1
  
 #ifdef 	MODE_SELF_VERIFY 
- 	movlw	0x08
- 	movwf	WREG1
+    movlw	0x08
+    movwf	WREG1
  	
 _PMWriteLp2:
 
-	tblrd	*-						; Point back into the block
-	movf	POSTDEC0, W
-	decfsz	WREG1, F
-	bra		_PMWriteLp2
+    banksel POSTDEC0
+    tblrd	*-						; Point back into the block
+    movf	POSTDEC0, W
+    decfsz	WREG1, F
+    bra		_PMWriteLp2
 
-	movlw	b'10000100'				; Setup writes
-	rcall	_StartWrite				; Write the data
+    movlw	b'10000100'				; Setup writes
+    rcall	_StartWrite				; Write the data
 
-	movlw	0x08
-	movwf	WREG1
+    movlw	0x08
+    movwf	WREG1
 
 _PMReadBackLp1:
 
-	tblrd	*+						; Test the data
-	movf	TABLAT, W
-	xorwf	POSTINC0, W
-	btfss	STATUS, Z
-	bsf		ERR_VERIFY
+    banksel TABLAT
+    tblrd	*+						; Test the data
+    movf	TABLAT, W
+    xorwf	POSTINC0, W
+    btfss	STATUS, Z
+    bsf		ERR_VERIFY
 	
-	decfsz	WREG1, F		
-	bra		_PMReadBackLp1			; Not finished then repeat
+    decfsz	WREG1, F		
+    bra		_PMReadBackLp1			; Not finished then repeat
 
 #else
-	tblrd	*-						; Point back into the block
+    tblrd	*-						; Point back into the block
 
-	movlw	b'10000100'				; Setup writes
-	rcall	_StartWrite				; Write the data
+    movlw	b'10000100'				; Setup writes
+    rcall	_StartWrite				; Write the data
 
-	tblrd	*+						; Return the pointer position	
+    tblrd	*+						; Return the pointer position	
 #endif
 
 #ifdef 	ALLOW_GET_CMD
-	bra		_CANSendAck
+    bra		_CANSendAck
 #else
-	bra		_CANMain
+    bra		_CANMain
 #endif
 ; *****************************************************************************
 
@@ -954,59 +983,60 @@ _PMReadBackLp1:
 ;				VOID _CFGRead()
 ;
 ; PreCondition:	WREG1 and FSR0 must be loaded with the count and address of
-;				the source data.
+;		the source data.
 ;
 ; Input:    	None.
 ;                               
 ; Output:   	None. 
 ;
 ; Side 
-; Effects: 		N/A. 
+; Effects: 	N/A. 
 ;
 ; Stack 
 ; Requirements: N/A
 ;
 ; Overview: 	These routines are technically not functions since they will not 
-;				return when called. They have been written in a linear form to 
-;				save space.	Thus 'call' and 'return' instructions are not 
-;				included, but rather they are implied.	
+;		return when called. They have been written in a linear form to 
+;		save space.	Thus 'call' and 'return' instructions are not 
+;		included, but rather they are implied.	
 ;
-; 				This is the Config memory read/write functions. Read is 
-; 				actually the same for standard program memory, so any read
-;				request is passed directly to _PMRead.
+; 		This is the Config memory read/write functions. Read is 
+; 		actually the same for standard program memory, so any read
+;		request is passed directly to _PMRead.
 ; *****************************************************************************
 _CFGWrite:		
 
+    banksel INDF0
 #ifdef MODE_SELF_VERIFY				; Write to config area
-	movf	INDF0, W				; Load data
+    movf	INDF0, W				; Load data
 #else
-	movf	POSTINC0, W
+    movf	POSTINC0, W
 #endif 				
-	movwf	TABLAT
+    movwf	TABLAT
 	
-	rcall	_UpdateChksum			; Adjust the checksum
+    rcall	_UpdateChksum			; Adjust the checksum
 	
-	tblwt	*						; Write the data
+    tblwt	*                       ; Write the data
 
-	movlw	b'11000100'
-	rcall	_StartWrite				
+    movlw	b'11000100'
+    rcall	_StartWrite				
 
-	tblrd	*+						; Move the pointers and verify
+    tblrd	*+                      ; Move the pointers and verify
 	
 #ifdef MODE_SELF_VERIFY
-	movf	TABLAT, W
-	xorwf	POSTINC0, W
-	btfss	STATUS, Z
-	bsf		ERR_VERIFY
+    movf	TABLAT, W
+    xorwf	POSTINC0, W
+    btfss	STATUS, Z
+    bsf		ERR_VERIFY
 #endif
 
-	decfsz	WREG1, F
-	bra		_CFGWrite				; Not finished then repeat
+    decfsz	WREG1, F
+    bra		_CFGWrite               ; Not finished then repeat
 	
 #ifdef 	ALLOW_GET_CMD
-	bra		_CANSendAck
+    bra		_CANSendAck
 #else
-	bra		_CANMain
+    bra		_CANMain
 #endif
 ; *****************************************************************************
 
@@ -1018,41 +1048,42 @@ _CFGWrite:
 ;				VOID _EEWrite()
 ;
 ; PreCondition:	WREG1 and FSR0 must be loaded with the count and address of
-;				the source data.
+;		the source data.
 ;
 ; Input:    	None.
 ;                               
 ; Output:   	None. 
 ;
 ; Side 
-; Effects: 		N/A. 
+; Effects: 	N/A. 
 ;
 ; Stack 
 ; Requirements: N/A
 ;
 ; Overview: 	These routines are technically not functions since they will not 
-;				return when called. They have been written in a linear form to 
-;				save space.	Thus 'call' and 'return' instructions are not 
-;				included, but rather they are implied.	
+;		return when called. They have been written in a linear form to 
+;		save space.	Thus 'call' and 'return' instructions are not 
+;		included, but rather they are implied.	
 ;
-; 				This is the EEDATA memory read/write functions.
+;		This is the EEDATA memory read/write functions.
 ; *****************************************************************************
 #ifdef 	ALLOW_GET_CMD
 
 _EERead:
 
-	clrf	EECON1 
+    banksel EECON1
+    clrf	EECON1 
 
-	bsf		EECON1, RD				; Read the data
-	movff	EEDATA, POSTINC0
+    bsf		EECON1, RD              ; Read the data
+    movff	EEDATA, POSTINC0
 	
-	infsnz	EEADR, F				; Adjust EEDATA pointer
-	incf	EEADRH, F
+    infsnz	EEADR, F                ; Adjust EEDATA pointer
+    incf	EEADRH, F
 
-	decfsz	WREG1, F
-	bra		_EERead					; Not finished then repeat
+    decfsz	WREG1, F
+    bra		_EERead                 ; Not finished then repeat
 
-	bra		_CANSendResponce
+    bra		_CANSendResponce
 #endif
 ; *********************************************************
 	
@@ -1060,36 +1091,37 @@ _EERead:
 
 _EEWrite:
 
+    banksel INDF0
 #ifdef MODE_SELF_VERIFY
-	movf	INDF0, W				; Load data
+    movf	INDF0, W                ; Load data
 #else
-	movf	POSTINC0, W
+    movf	POSTINC0, W
 #endif
-	movwf	EEDATA
+    movwf	EEDATA
 	
-	rcall	_UpdateChksum			; Adjust the checksum
+    rcall	_UpdateChksum			; Adjust the checksum
 
-	movlw	b'00000100'				; Setup for EEData
-	rcall	_StartWrite				; and write
+    movlw	b'00000100'             ; Setup for EEData
+    rcall	_StartWrite             ; and write
 	
 #ifdef MODE_SELF_VERIFY
-	clrf	EECON1 					; Read back the data
-	bsf		EECON1, RD				; verify the data
-	movf	EEDATA, W				; and adjust pointer
-	xorwf	POSTINC0, W				
-	btfss	STATUS, Z
-	bsf		ERR_VERIFY
+    clrf	EECON1                  ; Read back the data
+    bsf		EECON1, RD              ; verify the data
+    movf	EEDATA, W               ; and adjust pointer
+    xorwf	POSTINC0, W				
+    btfss	STATUS, Z
+    bsf		ERR_VERIFY
 #endif
 	
-	infsnz	EEADR, F				; Adjust EEDATA pointer
-	incf	EEADRH, F
+    infsnz	EEADR, F                ; Adjust EEDATA pointer
+    incf	EEADRH, F
 
-	decfsz	WREG1, F		
-	bra		_EEWrite				; Not finished then repeat
+    decfsz	WREG1, F		
+    bra		_EEWrite                ; Not finished then repeat
 
 #ifdef 	ALLOW_GET_CMD
 #else
-	bra		_CANMain
+    bra		_CANMain
 #endif
 ; *****************************************************************************
 
@@ -1114,26 +1146,27 @@ _EEWrite:
 ; Requirements: N/A
 ;
 ; Overview: 	These routines are technically not functions since they will not 
-;				return when called. They have been written in a linear form to 
-;				save space.	Thus 'call' and 'return' instructions are not 
-;				included, but rather they are implied.	
+;		return when called. They have been written in a linear form to 
+;		save space.	Thus 'call' and 'return' instructions are not 
+;		included, but rather they are implied.	
 ;
-; 				These routines are used for 'talking back' to the source. The 
-;				_CANSendAck routine sends an empty message to indicate 
-;				acknowledgement of a memory write operation. The 
-;				_CANSendResponce is used to send data back to the source.
+; 		These routines are used for 'talking back' to the source. The 
+;		_CANSendAck routine sends an empty message to indicate 
+;		acknowledgement of a memory write operation. The 
+;		_CANSendResponce is used to send data back to the source.
 ; *****************************************************************************
 #ifdef 	ALLOW_GET_CMD
 
 _CANSendAck:
 
-	btfss	MODE_ACK
-	bra		_CANMain
+    btfss	MODE_ACK
+    bra		_CANMain
 	
 _CANSendAck2:		
 
-	clrf	TXB0DLC					; Setup for a 0 byte transmission
-	bra		_CANSendMessage
+    banksel TXB0DLC
+    clrf	TXB0DLC                     ; Setup for a 0 byte transmission
+    bra		_CANSendMessage
 #endif
 ; *********************************************************
 
@@ -1142,33 +1175,34 @@ _CANSendAck2:
 
 _CANSendResponce:
 
-	movlw	0x08					; Setup for 8 byte transmission
-	movwf	TXB0DLC
+    banksel TXB0DLC
+    movlw	0x08                        ; Setup for 8 byte transmission
+    movwf	TXB0DLC
 
 _CANSendMessage:
 
-	btfsc	TXB0CON,TXREQ			; Wait for the buffer to empty
-	bra		$ - 2
+    btfsc	TXB0CON,TXREQ				; Wait for the buffer to empty
+    bra		$ - 2
 
-	movlw	CAN_TXB0SIDH			; Set ID
-	movwf	TXB0SIDH
-	movlw	CAN_TXB0SIDL
-	movwf	TXB0SIDL
-	movlw	CAN_TXB0EIDH
-	movwf	TXB0EIDH
+    movlw	CAN_TXB0SIDH				; Set ID
+    movwf	TXB0SIDH
+    movlw	CAN_TXB0SIDL
+    movwf	TXB0SIDL
+    movlw	CAN_TXB0EIDH
+    movwf	TXB0EIDH
 	;movlw	CAN_TXB0EIDL
-	movf	_vscpNickname,w			; reply with nickname as id
-	movwf	TXB0EIDL
+    movf	_vscpNickname,w				; reply with nickname as id
+    movwf	TXB0EIDL
 	
-	bsf		CANTX_CD_BIT			; Setup the command bit
-	btfss	CAN_CD_BIT
-	bcf		CANTX_CD_BIT
+    bsf		CANTX_CD_BIT                ; Setup the command bit
+    btfss	CAN_CD_BIT
+    bcf		CANTX_CD_BIT
 			
-	bsf		TXB0CON, TXREQ			; Start the transmission
+    bsf		TXB0CON, TXREQ              ; Start the transmission
 	
-	bra		_CANMain
+    bra		_CANMain
 #endif
 ; *****************************************************************************	
 
 
-	END
+    END

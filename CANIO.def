@@ -34,16 +34,6 @@
 #define		CAN_RXM0EIDH	0xfc
 #define		CAN_RXM0EIDL	0x00
 
-; 500 kbps, 40MHz XTAL, HL PLL
-;#define		CAN_BRGCON1		0x01		; Data rate control
-;#define		CAN_BRGCON2		0xbf
-;#define		CAN_BRGCON3		0x02
-
-; 500 kbps, 20MHz XTAL, 
-;#define		CAN_BRGCON1		0x00		; Data rate control
-;#define		CAN_BRGCON2		0xb5
-;#define		CAN_BRGCON3		0x01
-
 ; 125 kbps, 32MHz XTAL, HL PLL
 ;#define		CAN_BRGCON1		0x07		; Data rate control
 ;#define		CAN_BRGCON2		0xb8

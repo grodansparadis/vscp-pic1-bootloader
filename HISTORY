@@ -1,3 +1,7 @@
+2015-05-21 AKHE Version 0.2.3
+Now compiles correctly for "K" devices. (Thanks to Stevens work)
+Bootloader mode is forced when the status button is held and the module is powerd up.
+
 2014-08-18 AKHE  Version 0.2.2
 ==============================
 Adopted for MPLABX.
