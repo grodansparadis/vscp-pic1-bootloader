@@ -2,7 +2,7 @@
 #define		ALLOW_GET_CMD
 ;#define		MODE_SELF_VERIFY
 
-#define		NEAR_JUMP
+;#define		NEAR_JUMP
 #define		HIGH_INT_VECT	0x808
 #define		LOW_INT_VECT	0x818
 #define		RESET_VECT		0x800

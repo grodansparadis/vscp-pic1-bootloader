@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=CANBoot.X
 
 # Active Configuration
-DEFAULTCONF=pic18f26k80
+DEFAULTCONF=pic18f2580-40mhz
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=pic18f2580 pic18f26k80 
+ALLCONFS=pic18f2580-40mhz pic18f26k80-40mhz 
 
 
 # build
@@ -45,15 +45,15 @@ ALLCONFS=pic18f2580 pic18f26k80
 
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f2580 clean
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f26k80 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f2580-40mhz clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f26k80-40mhz clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f2580 build
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f26k80 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f2580-40mhz build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=pic18f26k80-40mhz build
 
 
 

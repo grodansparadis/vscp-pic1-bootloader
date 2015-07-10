@@ -175,17 +175,51 @@
 #include	canio.def
 ; *****************************************************************************
 
-#ifdef __18F2580
-; WDT must be off
+#ifdef __18F2580  
+    
+    ; WDT must be off
     CONFIG WDT = OFF, WDTPS = 128   
     CONFIG OSC = HSPLL
     CONFIG BOREN = BOACTIVE
     CONFIG STVREN = ON
     CONFIG BORV = 3
-; LVP must be off
+    
+    ; LVP must be off
     CONFIG LVP = OFF
-    CONFIG CPB = ON
     CONFIG BBSIZ = 2048 
+    
+    ; CONFIG5L
+    CONFIG  CP0 = ON              ; Code Protect 00800-03FFF (Enabled)
+    CONFIG  CP1 = ON              ; Code Protect 04000-07FFF (Enabled)
+    CONFIG  CP2 = ON              ; Code Protect 08000-0BFFF (Enabled)
+    CONFIG  CP3 = ON              ; Code Protect 0C000-0FFFF (Enabled)
+    
+    ; CONFIG5H
+    CONFIG  CPB = ON              ; Code Protect Boot (Enabled)
+    CONFIG  CPD = OFF             ; Data EE Read Protect (Disabled)
+    
+    ; CONFIG6L
+    CONFIG  WRT0 = OFF            ; Table Write Protect 00800-03FFF (Disabled)
+    CONFIG  WRT1 = OFF            ; Table Write Protect 04000-07FFF (Disabled)
+    CONFIG  WRT2 = OFF            ; Table Write Protect 08000-0BFFF (Disabled)
+    CONFIG  WRT3 = OFF            ; Table Write Protect 0C000-0FFFF (Disabled)
+ 
+    ; CONFIG6H
+    ; if WRTB is ON device never comes out of bootload
+    CONFIG  WRTC = OFF            ; Config. Write Protect (Disabled)
+    CONFIG  WRTB = OFF            ; Table Write Protect Boot (Disabled)
+    CONFIG  WRTD = OFF            ; Data EE Write Protect (Disabled)
+    
+    ; CONFIG7L
+    CONFIG  EBTR0 = OFF           ; Table Read Protect 00800-03FFF (Disabled)
+    CONFIG  EBTR1 = OFF           ; Table Read Protect 04000-07FFF (Disabled)
+    CONFIG  EBTR2 = OFF           ; Table Read Protect 08000-0BFFF (Disabled)
+    CONFIG  EBTR3 = OFF           ; Table Read Protect 0C000-0FFFF (Disabled)
+    
+    ; CONFIG7H
+    ; If set to ON constants in flash can not be read.
+    CONFIG  EBTRB = OFF           ; *Table Read Protect Boot (Disabled)
+    
 #endif
  
 #ifdef __18F26K80
@@ -240,7 +274,7 @@
 
     ; CONFIG6H
     CONFIG  WRTC = OFF            ; Config. Write Protect (Disabled)
-    CONFIG  WRTB = ON             ; Table Write Protect Boot (Disabled)
+    CONFIG  WRTB = OFF            ; Table Write Protect Boot (Disabled)
     CONFIG  WRTD = OFF            ; Data EE Write Protect (Disabled)
 
     ; CONFIG7L
@@ -250,7 +284,7 @@
     CONFIG  EBTR3 = OFF           ; Table Read Protect 0C000-0FFFF (Disabled)
 
     ; CONFIG7H
-    CONFIG  EBTRB = ON            ; Table Read Protect Boot (Disabled)
+    CONFIG  EBTRB = OFF           ; Table Read Protect Boot (Disabled)
 
 #endif
  
@@ -262,18 +296,18 @@
 #define		TRUE	1
 #define		FALSE  	0
 
-#define 	VSCP_BOOT_FLAG		0xff	; Boot flag is stored in EEPROM location 0
-                                        ; and if there the bootloader will be activated.
+#define 	VSCP_BOOT_FLAG          0xff	; Boot flag is stored in EEPROM location 0
+                                            ; and if there the bootloader will be activated.
 
-#define 	WREG1 	PRODH				; Alternate working register
+#define 	WREG1 	PRODH                   ; Alternate working register
 #define		WREG2	PRODL
 
 
-#define		MODE_WRT_UNLCK		_bootCtlBits,0	; Unlock write and erase
-#define		MODE_ERASE_ONLY		_bootCtlBits,1	; Erase without write
-#define		MODE_AUTO_ERASE		_bootCtlBits,2	; Enable auto erase before write
-#define		MODE_AUTO_INC		_bootCtlBits,3	; Enable auto inc the address
-#define		MODE_ACK			_bootCtlBits,4	; Acknowledge mode
+#define		MODE_WRT_UNLCK          _bootCtlBits,0	; Unlock write and erase
+#define		MODE_ERASE_ONLY         _bootCtlBits,1	; Erase without write
+#define		MODE_AUTO_ERASE         _bootCtlBits,2	; Enable auto erase before write
+#define		MODE_AUTO_INC           _bootCtlBits,3	; Enable auto inc the address
+#define		MODE_ACK                _bootCtlBits,4	; Acknowledge mode
 
 ; AKHE
 #define		MODE_FLAG_WRT_UNLCK		0x01
@@ -282,7 +316,7 @@
 #define		MODE_FLAG_AUTO_INC		0x08
 #define		MODE_FLAG_ACK			0x10
 
-#define		ERR_VERIFY		_bootErrStat,0	; Failed to verify 
+#define		ERR_VERIFY              _bootErrStat,0	; Failed to verify 
 
 #define		CMD_NOP					0x00
 #define		CMD_RESET				0x01
@@ -465,56 +499,94 @@ _CANInit:
 
 ; AKHE If RC0 is zero on boot 
 ; force bootloader mode
+#ifdef __18F26K80    
     banksel ANCON0
     clrf    ANCON0
     clrf    ANCON1
-    movlw   b'00001100'
+#endif    
+    movlw   b'00001100'             ; CAN is input
     movwf   TRISB
     movlw   b'11111101'             ; RC0 is input
     movwf   TRISC
-    bsf     PORTC,RC1
+    bsf     PORTC,RC1               ; Light status lamp
     movf    PORTC,W
-    andlw   b'00000001'
-    bz      bootload_mode	
+    andlw   b'00000001'             ; Check if button is pressed
+    bz      button_pressed	
 
     banksel EECON1
     clrf	EECON1
     clrf	EEADR					; Point to first location of EEDATA (BOOTFLAG)
-    clrf	EEADRH	
-    bsf		EECON1, RD				; Read the control code
-    incfsz	EEDATA, W
-
+#ifdef __18F26K80    
+    clrf	EEADRH
+#endif    
+    
+    ; Read boot flag
+    BCF     EECON1, EEPGD           ; Point to DATA memory
+    BCF     EECON1, CFGS            ; Access EEPROM
+    BSF     EECON1, RD              ; EEPROM Read
+    NOP
+    INFSNZ	EEDATA, W
+    BRA     bootload_mode           ; Bootloader if bootflag = 0xff
+    
+    banksel CANCON
 #ifdef	NEAR_JUMP
+    movlw   b'10000000'             ; Set configure mode
+    movwf   CANCON
     bra		ResetRemapped			; If not 0xFF then normal reset
 #else
+    movlw   b'10000000'             ; Set configure mode
+    movwf   CANCON
     goto	ResetRemapped
 #endif
+    
+button_pressed:
+    
+    banksel EECON1
+    
+    ; If button is pressed we always use nickname 0xfe 
+#ifdef __18F26K80    
+    clrf	EEADRH
+#endif    
+    movlw   01h;                    ; Point at nickname
+    movwf   EEADR                   
+    movlw   0FEh                    ; Default nickname
+    movwf   EEDATA                  ; Data Memory Value to write
+    movlw	b'00000100'				; Setup for EEData
+    rcall   _StartWrite
 
 bootload_mode:
     
     banksel EECON1
+    
+    ; Make sure boot flag is set 
+#ifdef __18F26K80    
+    clrf	EEADRH
+#endif    
+    clrf    EEADR                   ; Point at bootflag
+    movlw   0FFh                    ; Bootloader enabled
+    movwf   EEDATA                  ; Data Memory Value to write
+    movlw	b'00000100'				; Setup for EEData
+    rcall   _StartWrite    
     clrf	_bootSpcCmd				; Reset the special command register
 
 	; Get Nickname from EEPROM and save in RAM
-    movlw	0x01
+    banksel EECON1
+#ifdef __18F26K80    
+    clrf    EEADRH
+#endif    
+    banksel EEADR
+    movlw	01h
     movwf	EEADR					; Point at nickname in EEPROM	
-    bsf		EECON1, RD				; Read the control code
+    BCF     EECON1, EEPGD           ; Point to DATA memory
+    BCF     EECON1, CFGS            ; Access EEPROM
+    BSF     EECON1, RD              ; EEPROM Read
+    NOP
     movf	EEDATA, W
     movwf 	_vscpNickname
 	
     movlw	( MODE_FLAG_AUTO_ERASE | MODE_FLAG_AUTO_INC | MODE_FLAG_ACK )
     movwf	_bootCtlBits
 		
-    movlb	d'15'					; Set Bank 15
-    
-#ifdef __18F2580
-    bcf		TRISB, CANTX			; Set the TX pin to output	
-#endif
-
-#ifdef __18F26K80
-    ;movlw   b'00001000'             ; CAN RX is input
-    ;movwf   TRISB
-#endif
     
     banksel RXF0SIDH
     movlw	CAN_RXF0SIDH			; Set filter 0
@@ -570,7 +642,7 @@ bootload_mode:
 _CANMain:
 
     banksel PORTC
-    bsf     PORTC,RC0           ; AKHE: status on
+    bcf     PORTC,RC1           ; AKHE: status on
 
     banksel RXB0CON
     bcf		RXB0CON, RXFUL		; Clear the receive flag
@@ -580,7 +652,8 @@ _CANMain:
     btfss	RXB0CON, RXFUL		; Wait for a message
     bra		$ - 4				; AKHE: 
 	
-    bcf     PORTC,RC0           ; AKHE: status off
+    banksel PORTC
+    bsf     PORTC,RC1           ; AKHE: status off
 	
 #ifdef 	ALLOW_GET_CMD
     btfss	CAN_PG_BIT			; Put or get data?
@@ -588,6 +661,7 @@ _CANMain:
 	
 ; Put
 	
+    banksel TXB0D0
     lfsr	0, TXB0D0			; Set pointer to the transmit buffer
     movlw	0x08
     movwf	_bootCount			; Setup the count to eight
@@ -739,6 +813,7 @@ _SpecialCmdJp1:
     bra		_SpecialCmdJp2
 	
     banksel EEADR
+    
     clrf	EEADR					; AKHE - Point to first location of EEDATA 
     clrf	EEADRH	
     clrf	EEDATA					; and clear the data
@@ -750,7 +825,7 @@ _SpecialCmdJp2:
 #ifdef 	ALLOW_GET_CMD
     bra		_CANSendAck				; or send an acknowledge
 #else
-    bra		_CANMain
+    goto	_CANMain
 #endif					
 ; *****************************************************************************
 	
@@ -782,6 +857,7 @@ _SetPointers:
 	
     movf	_bootAddrL, W			; Copy the low pointer
     movwf	TBLPTRL
+    banksel EECON1
     movwf	EEADR
 	
     btfss	MODE_AUTO_INC			; Adjust the pointer if auto inc is enabled
@@ -828,7 +904,11 @@ _DecodeJp2:
 	
     movf	WREG2,W					; EEPROM data = 0xF00000
     xorlw	0xF0
-    bnz		_CANMain
+    ;bnz		_CANMain
+    bz      _DecodeJp3  
+    bra     _CANMain
+  
+_DecodeJp3:    
 #ifdef 	ALLOW_GET_CMD
     btfsc	CAN_PG_BIT
     bra		_EERead
@@ -905,14 +985,17 @@ _PMWrite:
 #ifdef 	ALLOW_GET_CMD
     bra		_CANSendAck
 #else
-    bra		_CANMain
+    goto	_CANMain
 #endif
 
     banksel TBLPTRL
     movf	TBLPTRL, W				; Check for a valid 8 byte border
     andlw	b'00000111'
-    bnz		_CANMain	
- 	
+    ;bnz		_CANMain	
+    bz      _PMWriteLp0
+    goto    _CANMain
+
+_PMWriteLp0:    
     movlw	0x08
     movwf	WREG1
 
@@ -971,7 +1054,7 @@ _PMReadBackLp1:
 #ifdef 	ALLOW_GET_CMD
     bra		_CANSendAck
 #else
-    bra		_CANMain
+    goto	_CANMain
 #endif
 ; *****************************************************************************
 
@@ -1036,7 +1119,7 @@ _CFGWrite:
 #ifdef 	ALLOW_GET_CMD
     bra		_CANSendAck
 #else
-    bra		_CANMain
+    goto	_CANMain
 #endif
 ; *****************************************************************************
 
@@ -1121,7 +1204,7 @@ _EEWrite:
 
 #ifdef 	ALLOW_GET_CMD
 #else
-    bra		_CANMain
+    goto	_CANMain
 #endif
 ; *****************************************************************************
 
@@ -1160,7 +1243,7 @@ _EEWrite:
 _CANSendAck:
 
     btfss	MODE_ACK
-    bra		_CANMain
+    goto	_CANMain
 	
 _CANSendAck2:		
 
@@ -1200,7 +1283,7 @@ _CANSendMessage:
 			
     bsf		TXB0CON, TXREQ              ; Start the transmission
 	
-    bra		_CANMain
+    goto	_CANMain
 #endif
 ; *****************************************************************************	
 

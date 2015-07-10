@@ -1,4 +1,12 @@
+2015-07-10 AKHE Version 0.2.4
+=============================
+Fixed problem with not going into bootloader if init. button was not
+pressed.
+If init. button is pressed when a board is powered the bootloader is always 
+entered with nickname 0xfe (old code used the current nickname).
+
 2015-05-21 AKHE Version 0.2.3
+=============================
 Now compiles correctly for "K" devices. (Thanks to Stevens work)
 Bootloader mode is forced when the status button is held and the module is powerd up.
 

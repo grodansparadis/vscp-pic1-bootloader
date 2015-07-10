@@ -8,10 +8,15 @@ in most aspects it is the same. The changes just makes it works along side an in
 CAN4VSCP system.
 
 Use file/export in MPLAB(x) after build to write the HEX file.
-When programmed into a device and activated (byte 0 in EEPROM is 0xFF on startup) or the status
-button (RC0) is held low on startup, a confirm bootloader mode CAN message with id=0x000014nn/0x000015nn 
-and no data will be sent. Node id (nn) (least eight bits of id) is taken from EEPROM byte 1.
-If byte 0 in EEPROM is not oxFF on startup a normal boot of the relocated code (offset=0x800) will take place.
+
+When programmed into a device and activated (byte 0 in EEPROM is 0xff on startup or the status
+button (RC0) is held low on startup) a confirm bootloader mode CAN message with id=0x000014nn/0x000015nn 
+and no data will be sent. Node id (nn) (least eight bits of id) is taken from EEPROM byte 1. For a freshly 
+written bootloader nn=0xfe and this is also true for a bootloader that is entered by holding the init. button 
+and power a board. If the board has been forced in to bootloader mode by the VSCP firmware nn will be the
+nickname the node had at that time.
+
+If byte 0 in EEPROM is not oxff on startup a normal boot of the relocated code (offset=0x800) will take place.
 Hex files for device programming is available here 
 https://sourceforge.net/projects/m2m/files/VSCP%20Firmware/bootloader/
 

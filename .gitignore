@@ -50,3 +50,13 @@
 /CANBoot.X/dist/pic18f26k80/production/*.map
 /CANBoot.X/nbproject/*.mk
 /CANBoot.X/nbproject/*.bash
+/CANBoot.X/build/pic18f2580-40mhz/production/_ext/1472/CANIO.err
+/CANBoot.X/build/pic18f2580-40mhz/production/_ext/1472/CANIO.lst
+/CANBoot.X/build/pic18f2580-40mhz/production/_ext/1472/CANIO.o.d
+/CANBoot.X/build/pic18f26k80-40mhz/production/_ext/1472/CANIO.err
+/CANBoot.X/build/pic18f26k80-40mhz/production/_ext/1472/CANIO.lst
+/CANBoot.X/build/pic18f26k80-40mhz/production/_ext/1472/CANIO.o.d
+/CANBoot.X/dist/pic18f2580-40mhz/production/CANBoot.X.production.cof
+/CANBoot.X/dist/pic18f2580-40mhz/production/CANBoot.X.production.map
+/CANBoot.X/dist/pic18f26k80-40mhz/production/CANBoot.X.production.cof
+/CANBoot.X/dist/pic18f26k80-40mhz/production/CANBoot.X.production.map
