@@ -1,3 +1,7 @@
+2015-07-11 AKHE Version 0.2.5
+=============================
+Fixed bootload problem on 2580 where the sequency hanged 
+
 2015-07-10 AKHE Version 0.2.4
 =============================
 Fixed problem with not going into bootloader if init. button was not

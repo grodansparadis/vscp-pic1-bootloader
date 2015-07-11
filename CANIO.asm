@@ -93,12 +93,12 @@
 ;*
 ;* Control bits:
 ;* ------------
-;* MODE_WRT_UNLCK 	-	Set this to allow write and erase operations to memory.
-;* MODE_ERASE_ONLY 	- 	Set this to only erase Program Memory on a put command. Must 
-;*						be on 64 byte boundary.
-;* MODE_AUTO_ERASE 	-	Set this to automatically erase Program Memory while writing data.
-;* MODE_AUTO_INC 	-	Set this to automatically increment the pointer after writing.
-;* MODE_ACK 		-	Set this to generate an acknowledge after a 'put' (PG Mode only)
+;* Bit 0: MODE_WRT_UNLCK 	-	Set this to allow write and erase operations to memory.
+;* Bit 1: MODE_ERASE_ONLY 	- 	Set this to only erase Program Memory on a put command. Must 
+;*                              be on 64 byte boundary.
+;* Bit 2: MODE_AUTO_ERASE 	-	Set this to automatically erase Program Memory while writing data.
+;* Bit 3: MODE_AUTO_INC 	-	Set this to automatically increment the pointer after writing.
+;* Bit 4: MODE_ACK          -	Set this to generate an acknowledge after a 'put' (PG Mode only)
 ;*
 ;* Special Commands:
 ;* ----------------
@@ -189,10 +189,10 @@
     CONFIG BBSIZ = 2048 
     
     ; CONFIG5L
-    CONFIG  CP0 = ON              ; Code Protect 00800-03FFF (Enabled)
-    CONFIG  CP1 = ON              ; Code Protect 04000-07FFF (Enabled)
-    CONFIG  CP2 = ON              ; Code Protect 08000-0BFFF (Enabled)
-    CONFIG  CP3 = ON              ; Code Protect 0C000-0FFFF (Enabled)
+    CONFIG  CP0 = OFF             ; Code Protect 00800-03FFF (Enabled)
+    CONFIG  CP1 = OFF             ; Code Protect 04000-07FFF (Enabled)
+    CONFIG  CP2 = OFF             ; Code Protect 08000-0BFFF (Enabled)
+    CONFIG  CP3 = OFF             ; Code Protect 0C000-0FFFF (Enabled)
     
     ; CONFIG5H
     CONFIG  CPB = ON              ; Code Protect Boot (Enabled)
@@ -504,6 +504,7 @@ _CANInit:
     clrf    ANCON0
     clrf    ANCON1
 #endif    
+    banksel TRISB
     movlw   b'00001100'             ; CAN is input
     movwf   TRISB
     movlw   b'11111101'             ; RC0 is input
@@ -814,8 +815,10 @@ _SpecialCmdJp1:
 	
     banksel EEADR
     
-    clrf	EEADR					; AKHE - Point to first location of EEDATA 
-    clrf	EEADRH	
+    #ifdef __18F26K80 
+    clrf	EEADRH					; AKHE - Point to first location of EEDATA 
+    #endif
+    clrf	EEADR	
     clrf	EEDATA					; and clear the data
     movlw	b'00000100'				; Setup for EEData
     rcall	_StartWrite
