@@ -541,7 +541,7 @@ _CANInit:
 #endif
     
 button_pressed:
-    
+    bsf     MODE_WRT_UNLCK          ; allow _StartWrite to succeed
     banksel EECON1
     
     ; If button is pressed we always use nickname 0xfe 
