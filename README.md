@@ -17,8 +17,7 @@ and power a board. If the board has been forced in to bootloader mode by the VSC
 nickname the node had at that time.
 
 If byte 0 in EEPROM is not oxff on startup a normal boot of the relocated code (offset=0x800) will take place.
-Hex files for device programming is available here 
-https://sourceforge.net/projects/m2m/files/VSCP%20Firmware/bootloader/
+Hex files for device programming is available here under the release tab on this site.
 
 On reset id=0x000014fe/0x000015fe should be seen from a device with a pic1 bootloader installed. The nickname 
 0xfe is fetched from EEPROM address = 1 and for the bootloader to start the content at EEPROM address= 0 should 
@@ -26,5 +25,5 @@ hold 0xff. In all other cases the application code will be started.
 
 The application program should start at offset 0x800
 
-Ake Hedman
-akhe@paradiseofthefrog.com
+Ake Hedman, Grodans Paradis AB
+akhe@grodansparadis.com
